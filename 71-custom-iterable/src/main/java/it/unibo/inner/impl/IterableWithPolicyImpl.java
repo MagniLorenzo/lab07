@@ -32,7 +32,7 @@ public class IterableWithPolicyImpl<T> implements IterableWithPolicy<T> {
 
         public T next(){
             if (this.hasNext()) {
-                return this.array[++this.current];
+                return this.array[this.current++];
             } else {
                 throw new java.util.NoSuchElementException();
             }
