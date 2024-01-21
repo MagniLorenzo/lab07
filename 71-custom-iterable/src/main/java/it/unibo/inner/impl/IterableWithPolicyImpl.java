@@ -5,9 +5,9 @@ import it.unibo.inner.api.*;
 
 public class IterableWithPolicyImpl<T> implements IterableWithPolicy<T> {
     
-    private final T arr[];
+    private final T[] arr;
 
-    public IterableWithPolicyImpl(final T elem[]){
+    public IterableWithPolicyImpl(final T[] elem){
         this.arr = elem;
     }
 
@@ -15,10 +15,10 @@ public class IterableWithPolicyImpl<T> implements IterableWithPolicy<T> {
 
     private class IteratorImpl<T> implements Iterator<T> {
 
-        private final T array[]; 
+        private final T[] array; 
         private int current;
 
-        public IteratorImpl(final T array[]){
+        public IteratorImpl(final T[] array){
             if (array == null) {
                 throw new java.lang.IllegalArgumentException();
             }
