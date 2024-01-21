@@ -26,7 +26,7 @@ public class IterableWithPolicyImpl<T> implements IterableWithPolicy<T> {
         this.predicateBehavior = filter;
     }
 
-    private class IteratorImpl<T> implements Iterator<T> {
+    private class IteratorImpl implements Iterator<T> {
 
         private final T[] array;
         private int current;
@@ -44,16 +44,21 @@ public class IterableWithPolicyImpl<T> implements IterableWithPolicy<T> {
         }
 
         public T next() {
-            if (this.hasNext()) {
-                return this.array[this.current++];
-            } else {
-                throw new java.util.NoSuchElementException();
+            while (this.hasNext()) {
+                T actualElem = this.array[this.current];
+                if (IterableWithPolicyImpl.this.predicateBehavior.test(actualElem)) {
+                    this.current++;
+                    return actualElem;
+                } else {
+                    this.current++;
+                }
             }
+            throw new java.util.NoSuchElementException();
         }
     }
 
     public Iterator<T> iterator() {
-        return new IteratorImpl<>(arr);
+        return new IteratorImpl(arr);
     }
 
     public String toString() {
