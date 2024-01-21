@@ -1,5 +1,6 @@
 package it.unibo.inner.impl;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import it.unibo.inner.api.*;
 
@@ -43,4 +44,7 @@ public class IterableWithPolicyImpl<T> implements IterableWithPolicy<T> {
         return new IteratorImpl<>(arr);
     }
 
+    public String toString(){
+        return Arrays.deepToString(arr);
+    }
 }
