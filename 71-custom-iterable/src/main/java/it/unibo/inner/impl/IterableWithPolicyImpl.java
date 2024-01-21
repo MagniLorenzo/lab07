@@ -27,7 +27,7 @@ public class IterableWithPolicyImpl<T> implements IterableWithPolicy<T> {
         }
 
         public boolean hasNext(){
-            return this.current < (this.array.length - 1);
+            return this.current < (this.array.length);
         }
 
         public T next(){
