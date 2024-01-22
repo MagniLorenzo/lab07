@@ -40,7 +40,12 @@ public class IterableWithPolicyImpl<T> implements IterableWithPolicy<T> {
         }
 
         public boolean hasNext() {
-            return this.current < (this.array.length);
+            for (int i = 0; this.current + i < this.array.length; i++) {
+                if (IterableWithPolicyImpl.this.predicateBehavior.test(this.array[current + i])) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public T next() {
