@@ -22,7 +22,7 @@ public class IterableWithPolicyImpl<T> implements IterableWithPolicy<T> {
         });
     }
 
-    public void setIterationPolicy(Predicate<T> filter) {
+    public void setIterationPolicy(final Predicate<T> filter) {
         this.predicateBehavior = filter;
     }
 
