@@ -54,7 +54,11 @@ public final class Transformers {
      * @param <O> output elements type
      */
     public static <I, O> List<O> transform(final Iterable<I> base, final Function<I, O> transformer) {
-        return null;
+        final ArrayList<O> result = new ArrayList<>();
+        for (final I input : Objects.requireNonNull(base, "The base iterable cannot be null")) {
+            result.add(transformer.call(input));
+        }
+        return result;
     }
 
     /**
