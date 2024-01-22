@@ -119,6 +119,12 @@ public final class Transformers {
      * @param <I> elements type
      */
     public static <I> List<I> reject(final Iterable<I> base, final Function<I, Boolean> test) {
-        return null;
+        final ArrayList<I> result = new ArrayList<>();
+        for (final I elem : Objects.requireNonNull(base, "The base iterable cannot be null")) {
+            if (!test.call(elem)) {
+                result.add(elem);
+            }
+        }
+        return result;
     }
 }
