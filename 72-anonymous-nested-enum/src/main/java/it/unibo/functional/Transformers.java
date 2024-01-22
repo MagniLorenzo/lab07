@@ -74,9 +74,7 @@ public final class Transformers {
      * @param <I> type of the collection elements
      */
     public static <I> List<? extends I> flatten(final Iterable<? extends Collection<? extends I>> base) {
-        final ArrayList<I> result = new ArrayList<>();
-        result.addAll(flattenTransform(base, Function.identity()));
-        return result;
+        return flattenTransform(base, Function.identity());
     }
 
     /**
@@ -115,12 +113,11 @@ public final class Transformers {
      * @param <I> elements type
      */
     public static <I> List<I> reject(final Iterable<I> base, final Function<I, Boolean> test) {
-        final ArrayList<I> result = new ArrayList<>();
-        for (final I elem : Objects.requireNonNull(base, "The base iterable cannot be null")) {
-            if (!test.call(elem)) {
-                result.add(elem);
+        final Function<I, Boolean> negateTest = new Function<I,Boolean>() {
+            public Boolean call(I input){
+                return !test.call(input);
             }
-        }
-        return result;
+        };
+        return select(base, negateTest);
     }
 }
