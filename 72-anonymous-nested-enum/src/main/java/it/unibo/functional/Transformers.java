@@ -74,7 +74,13 @@ public final class Transformers {
      * @param <I> type of the collection elements
      */
     public static <I> List<? extends I> flatten(final Iterable<? extends Collection<? extends I>> base) {
-        return null;
+        final ArrayList<I> result = new ArrayList<>();
+        for(final Collection<? extends I> innerCollections : Objects.requireNonNull(base, "The base iterable cannot be null")){
+            for (final I elem : innerCollections) {
+                result.add(Function.<I>identity().call(elem));
+            }
+        }
+        return result;
     }
 
     /**
