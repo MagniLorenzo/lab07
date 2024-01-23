@@ -38,7 +38,7 @@ public final class MonthSorterNested implements MonthSorter {
             return this.daysNumber;
         }
 
-        public Month fromString(final String str) {
+        public static Month fromString(final String str) {
             final ArrayList<Month> result = new ArrayList<>();
             final String upperStr = str.toUpperCase();
             for (final Month mese : Month.values()) {
@@ -61,7 +61,11 @@ public final class MonthSorterNested implements MonthSorter {
 
     @Override
     public Comparator<String> sortByDays() {
-        return null;
+        return new Comparator<String>() {
+            public int compare(final String o1, final String o2) {
+                return Month.fromString(o1).getDaysNumber() - Month.fromString(o2).getDaysNumber();
+            }
+        };
     }
 
     @Override
