@@ -70,6 +70,10 @@ public final class MonthSorterNested implements MonthSorter {
 
     @Override
     public Comparator<String> sortByOrder() {
-        return null;
+        return new Comparator<String>() {
+            public int compare(final String o1, final String o2) {
+                return Month.fromString(o1).compareTo(Month.fromString(o2));
+            }
+        };
     }
 }
